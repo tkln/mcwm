@@ -108,6 +108,7 @@ typedef enum {
     KEY_M,
     KEY_R,
     KEY_RET,
+    KEY_P,
     KEY_X,
     KEY_TAB,
     KEY_BACKTAB,
@@ -239,6 +240,7 @@ struct keys
     { USERKEY_MAXVERT, 0 },
     { USERKEY_RAISE, 0 },
     { USERKEY_TERMINAL, 0 },
+    { USERKEY_RUNCMD, 0 },
     { USERKEY_MAX, 0 },
     { USERKEY_CHANGE, 0 },
     { USERKEY_BACKCHANGE, 0 },
@@ -281,6 +283,7 @@ struct conf
     int borderwidth;            /* Do we draw borders? If so, how large? */    
     int snapmargin;             /* Do we have snap margin? If so, how large? */
     char *terminal;             /* Path to terminal to start. */
+    char *runcmd;                  /* Path to run dialog command. */
     uint32_t focuscol;          /* Focused border colour. */
     uint32_t unfocuscol;        /* Unfocused border colour.  */
     uint32_t fixedcol;          /* Fixed windows border colour. */
@@ -3218,6 +3221,10 @@ void handle_keypress(xcb_key_press_event_t *ev)
             start(conf.terminal);
             break;
 
+        case KEY_P: /* return */
+            start(conf.runcmd);
+            break;
+
         case KEY_F: /* f */
             fixwindow(focuswin, true);
             break;
@@ -4344,6 +4351,7 @@ int main(int argc, char **argv)
     conf.borderwidth = BORDERWIDTH;
     conf.snapmargin = SNAPMARGIN;
     conf.terminal = TERMINAL;
+    conf.runcmd = RUNCMD;
     conf.allowicons = ALLOWICONS;
     focuscol = FOCUSCOL;
     unfocuscol = UNFOCUSCOL;

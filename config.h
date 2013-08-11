@@ -31,6 +31,7 @@
  * Can be set from command line with "-t program".
  */
 #define TERMINAL "urxvtc"
+#define RUNCMD "dmenu_run"
 
 /*
  * Do we allow windows to be iconified? Set to true if you want this
@@ -76,6 +77,7 @@
 #define USERKEY_MAXVERT 	XK_M
 #define USERKEY_RAISE 		XK_R
 #define USERKEY_TERMINAL 	XK_Return
+#define USERKEY_RUNCMD		XK_P
 #define USERKEY_MAX 		XK_X
 #define USERKEY_CHANGE 		XK_Tab
 #define USERKEY_BACKCHANGE	XK_VoidSymbol
