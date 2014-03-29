@@ -101,3 +101,46 @@
 #define USERKEY_PREVSCREEN  XK_comma
 #define USERKEY_NEXTSCREEN  XK_period
 #define USERKEY_ICONIFY     XK_I
+
+struct key keys[] =
+{
+
+    /* keysym, keycode, mod, cb_func, client, cb_arg */
+    { XK_F, 0, MODKEY, fixwindow_, &focuswin, {.b = true} },
+    { XK_H, 0, MODKEY, movestep, &focuswin, {.c = 'h'} },
+    { XK_J, 0, MODKEY, movestep, &focuswin, {.c = 'j'} },
+    { XK_K, 0, MODKEY, movestep, &focuswin, {.c = 'k'} },
+    { XK_L, 0, MODKEY, movestep, &focuswin, {.c = 'l'} },
+    { XK_H, 0, MODKEY | SHIFTMOD, resizestep, &focuswin, {.c = 'h'} },
+    { XK_J, 0, MODKEY | SHIFTMOD, resizestep, &focuswin, {.c = 'j'} },
+    { XK_K, 0, MODKEY | SHIFTMOD, resizestep, &focuswin, {.c = 'k'} },
+    { XK_L, 0, MODKEY | SHIFTMOD, resizestep, &focuswin, {.c = 'l'} },
+    { XK_M, 0, MODKEY, maxvert, &focuswin, {} },
+    { XK_R, 0, MODKEY, raiseorlower_, &focuswin, {} },
+    { XK_Return, 0, MODKEY, runcmd, NULL, {.s = TERMINAL} },
+    { XK_P, 0, MODKEY, runcmd, NULL, {.s = RUNCMD} },
+    { XK_X, 0, MODKEY, maximize, &focuswin, {} },
+    { XK_Tab, 0, MODKEY, focusnext, NULL, {.b = false} },
+    { XK_Tab, 0, MODKEY | SHIFTMOD, focusnext, NULL, {.b = true} },
+    { XK_VoidSymbol, 0, MODKEY, focusnext, NULL, {.b = true} },
+    { XK_1, 0, MODKEY, changeworkspace_, NULL, {.ui = 0}},
+    { XK_2, 0, MODKEY, changeworkspace_, NULL, {.ui = 1} },
+    { XK_3, 0, MODKEY, changeworkspace_, NULL, {.ui = 2} },
+    { XK_4, 0, MODKEY, changeworkspace_, NULL, {.ui = 3} },
+    { XK_5, 0, MODKEY, changeworkspace_, NULL, {.ui = 4} },
+    { XK_6, 0, MODKEY, changeworkspace_, NULL, {.ui = 5} },
+    { XK_7, 0, MODKEY, changeworkspace_, NULL, {.ui = 6} },
+    { XK_8, 0, MODKEY, changeworkspace_, NULL, {.ui = 7} },
+    { XK_9, 0, MODKEY, changeworkspace_, NULL, {.ui = 8} },
+    { XK_0, 0, MODKEY, changeworkspace_, NULL, {.ui = 9} },
+    { XK_Y, 0, MODKEY, topleft, NULL, {} },
+    { XK_U, 0, MODKEY, topright, NULL, {} },
+    { XK_B, 0, MODKEY, botleft, NULL, {} },
+    { XK_N, 0, MODKEY, botright, NULL, {} },
+    { XK_End, 0, MODKEY, deletewin, NULL, {} },
+    { XK_comma, 0, MODKEY, prevscreen, NULL, {} },
+    { XK_period, 0, MODKEY, nextscreen, NULL, {} },
+    { XK_I, 0, MODKEY, iconify, &focuswin, {} },
+    { XK_C, 0, MODKEY, prevws, NULL, {} },
+    { XK_V, 0, MODKEY, nextws, NULL, {} },
+};
