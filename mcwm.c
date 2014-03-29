@@ -628,67 +628,11 @@ void changeworkspace(uint32_t ws)
 
 int changeworkspace_(struct client *cli, const union cb_arg arg)
 {
-    struct item *item;
-    struct client *client;
     (void) cli;
-    
-    if (arg.ui == curws)
-    {
-        PDEBUG("Changing to same workspace!\n");
-        return 0;
-    }
-
-    PDEBUG("Changing from workspace #%d to #%d\n", curws, ws);
-
-    /*
-     * We lose our focus if the window we focus isn't fixed. An
-     * EnterNotify event will set focus later.
-     */
-    if (NULL != focuswin && !focuswin->fixed)
-    {
-        setunfocus(focuswin->id);
-        focuswin = NULL;
-    }
-    
-    /* Go through list of current ws. Unmap everything that isn't fixed. */
-    for (item = wslist[curws]; item != NULL; item = item->next)
-    {
-        client = item->data;
-
-        PDEBUG("changeworkspace. unmap phase. ws #%d, client-fixed: %d\n",
-               curws, client->fixed);
-
-        if (!client->fixed)
-        {
-            /*
-             * This is an ordinary window. Just unmap it. Note that
-             * this will generate an unnecessary UnmapNotify event
-             * which we will try to handle later.
-             */
-            xcb_unmap_window(conn, client->id);
-        }
-    } /* for */
-    
-    /* Go through list of new ws. Map everything that isn't fixed. */
-    for (item = wslist[arg.ui]; item != NULL; item = item->next)
-    {
-        client = item->data;
-
-        PDEBUG("changeworkspace. map phase. ws #%d, client-fixed: %d\n",
-               ws, client->fixed);
-
-        /* Fixed windows are already mapped. Map everything else. */
-        if (!client->fixed)
-        {
-            xcb_map_window(conn, client->id);
-        }
-    }
-
-    xcb_flush(conn);
-
-    curws = arg.ui;
+    changeworkspace(arg.ui);
     return 0;
 }
+
 /*
  * Fix or unfix a window client from all workspaces. If setcolour is
  * set, also change back to ordinary focus colour when unfixing.
