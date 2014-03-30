@@ -67,7 +67,6 @@
 
 struct key keys[] =
 {
-
     /* keysym, keycode, mod, cb_func, client, cb_arg */
     { XK_F, 0, MODKEY, fixwindow_, &focuswin, {.b = true} },
     { XK_H, 0, MODKEY, movestep, &focuswin, {.c = 'h'} },
@@ -100,7 +99,7 @@ struct key keys[] =
     { XK_U, 0, MODKEY, topright, NULL, {} },
     { XK_B, 0, MODKEY, botleft, NULL, {} },
     { XK_N, 0, MODKEY, botright, NULL, {} },
-    { XK_End, 0, MODKEY, deletewin, NULL, {} },
+    { XK_C, 0, MODKEY | SHIFTMOD, deletewin, NULL, {} },
     { XK_comma, 0, MODKEY, prevscreen, NULL, {} },
     { XK_period, 0, MODKEY, nextscreen, NULL, {} },
     { XK_I, 0, MODKEY, iconify, &focuswin, {} },
